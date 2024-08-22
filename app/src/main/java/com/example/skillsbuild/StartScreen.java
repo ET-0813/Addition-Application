@@ -1,9 +1,11 @@
 package com.example.skillsbuild;
 
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,9 +13,16 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 public class StartScreen extends AppCompatActivity {
 
     private Button continueButton;
+    private TextView welcome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +36,8 @@ public class StartScreen extends AppCompatActivity {
         });
 
         continueButton = findViewById(R.id.continueButton);
+        welcome = findViewById(R.id.welcome);
+
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -34,5 +45,25 @@ public class StartScreen extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+        AssetManager assets = this.getAssets();
+        try {
+            InputStream inputStream = assets.open("welcome.txt");
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+            StringBuilder stringBuilder = new StringBuilder();
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                stringBuilder.append(line);
+            }
+            String output = stringBuilder.toString();
+
+            welcome.setText(output);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
