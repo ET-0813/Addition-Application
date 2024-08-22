@@ -14,7 +14,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -38,6 +37,9 @@ public class StartScreen extends AppCompatActivity {
         continueButton = findViewById(R.id.continueButton);
         welcome = findViewById(R.id.welcome);
 
+        /**
+         * Logic for continueButton to move to MainActivity
+         */
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,7 +48,10 @@ public class StartScreen extends AppCompatActivity {
             }
         });
 
-
+        /**
+         * Logic to display text from welcome.txt in the assets folder to display onto the
+         * "welcome" TextView
+         */
         AssetManager assets = this.getAssets();
         try {
             InputStream inputStream = assets.open("welcome.txt");

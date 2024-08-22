@@ -35,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
         add = (Button) findViewById(R.id.button);
         answer = (TextView) findViewById(R.id.textView2);
 
+        /**
+         * Logic to display the number added from the EditText widgets into the "answer" TextView
+         */
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,6 +50,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Method that checks whether the value in the EditText widget exists
+     * @param numStr A user's input number as a String
+     * @return The number a user inputs if it exists, else 0
+     */
     private int checkNumber(String numStr)
     {
         int num;
